@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(props) {
@@ -85,10 +86,14 @@ export default class Login extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
     };
 
     console.log(signUp);
+    axios.post('http://localhost:5000/signup', signUp).then( response => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   render() {
