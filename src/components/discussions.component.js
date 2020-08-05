@@ -5,11 +5,31 @@
 
 export default class Discussion extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+          discussions: []
+        }
     }
 
-    function renderDisc() {
+    componentDidMount() {
+      axios
+      .get("http://localhost:5000/discussion/getDisc", { withCredentials: true })
+      .then((response) => {
+        if ((response.data).length > 0) {
+          this.setState({
+              discussions: response.data
+            })
+        }
+        console.log(this.state);
+      })
+  }
+
+    renderDisc() {
         // {{#each discussion}}
+        this.state.discussions.forEach(element => {
+          
+        })
+        <div>
         <div class="discussion_box">
           <div class="d_profile_pic">
             <a href="/profile/{{this.USER_ID}}">
@@ -36,9 +56,9 @@ export default class Discussion extends Component {
             <form action="/reply" method="POST"> 
               <div class="comment_box">
                   <input id="description" class="comment_field" type="text" name="reply" placeholder="  add your reply ..." name="description" minlength="1"
-                    maxlength="2000"><br>
+                    maxlength="2000"></input><br></br>
                   <button class="btn btn-primary comment_btn" type="submit">Comment</button>
-                  <input value="{{this.ID}}" name="discussionId" hidden="true">
+                  <input value="{{this.ID}}" name="discussionId" hidden="true"></input>
               </div>
             </form>
           </div>
@@ -47,7 +67,7 @@ export default class Discussion extends Component {
         {/* {{/each}} */}
     }
     
-    function renderReplies() {
+    renderReplies() {
                 // {{#each this.replies}}
                 // {{>reply reply=this}}
                 // {{/each}}

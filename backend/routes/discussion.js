@@ -32,4 +32,13 @@ router.route("/addTopic").post(async (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route("/getDisc").get(async (req, res) => {
+    var disc = await Discuss.Discussion.find().sort({"createdAt": -1})
+    .then(disc => {
+        console.log(disc);
+        res.json(disc);
+    }).catch(err => res.status(400).json('Error: ' + err));
+
+}) 
+
 module.exports = router;
