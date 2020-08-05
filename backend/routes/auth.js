@@ -7,10 +7,10 @@ router.route('/').get(async (req, res) => {
   // req.session.userId ="test";
   console.log(req.session);
     if (!req.session.loggedIn) {
-        res.send("Not logged in");
+        res.send();
         return;
     }
-    await User.find({email :req.session.userId})
+    await User.User.find({email :req.session.userId})
       .then((users) =>{
         // console.log("user find");
         // console.log(res);
@@ -30,7 +30,7 @@ router.route('/signup').post( async (req, res) => {
       console.log(hashedPassword);
       user.password = hashedPassword;
       console.log(user);
-      const newUser = new User(user);
+      const newUser = new User.User(user);
       console.log(newUser)
       newUser.save()
           .then(() => res.json("registered"))
@@ -53,7 +53,7 @@ router.route('/login').post(async (req, res) => {
   // req.session.userId ="NEW";
   // console.log(req.session);
   // console.log(req.body);
-  const user = await User.find({email :req.body.loginEmail});
+  const user = await User.User.find({email :req.body.loginEmail});
   console.log(user);
   if (user == null) {
     return res.status(400).send('Cannot find user')

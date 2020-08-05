@@ -10,6 +10,7 @@ export default class signUp extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
+    this.onSignup = this.onSignup.bind(this);
 
 
     this.state = {

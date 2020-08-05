@@ -7,7 +7,9 @@ const userSchema = new Schema({
     lastName: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     password:{type: String, required: true},
-    rating: [{type: Schema.Types.ObjectId, ref: 'User'}]
+    rating: [{type: Schema.Types.ObjectId, ref: 'Rating'}],
+    about: {type: String},
+    picture: {type: String}
 });
 
 const ratingSchema = new Schema({
@@ -18,4 +20,7 @@ const ratingSchema = new Schema({
 const Rating = mongoose.model('Rating', ratingSchema)
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = {
+    User,
+    Rating
+}

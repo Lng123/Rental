@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Top from './top.component';
 import Card from './profilecard.component';
+import Create from './createDiscussion.component';
 import axios from "axios";
 
 export default class Home extends Component {
@@ -33,7 +34,11 @@ export default class Home extends Component {
         return(
             <div>
             <Top loggedIn={this.state.loggedIn}/>
+            <div class="row justify-content-center">
             <Card user = {this.state.user}/>
+            <Create/>
+            </div>
+
             </div>
         );
     }

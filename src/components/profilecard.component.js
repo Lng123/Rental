@@ -8,7 +8,7 @@ export default class ProfileCard extends Component {
     render() {
         if (this.props.user) {
             return(
-                <div class="card align-items-center">
+                <div class="card align-items-center col-md-2">
                 <a href="">
                    <img class="card-img-top rounded-circle" src=""></img>
                 </a>
@@ -26,7 +26,7 @@ export default class ProfileCard extends Component {
                         <div class="col-sm text-secondary">messages</div>
                     </div>
                     <div class="row rcard">
-                        <span class="col-* text-secondary">Likes</span>
+                        <span class="col-* text-secondary">Rating</span>
                         <div class="col-sm text-secondary">likes</div>
                     </div>
                 </div>
@@ -38,7 +38,9 @@ export default class ProfileCard extends Component {
             </div>
             );
         } else {
-            return <div></div>
+            return <div>
+                {/* Replace with loggged out */}
+            </div>
         }
         
     }

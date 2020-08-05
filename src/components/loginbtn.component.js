@@ -43,7 +43,7 @@ export default class Top extends Component {
         body: JSON.stringify(login)
       }).then((response) => {
         console.log(response);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
