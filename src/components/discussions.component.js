@@ -7,13 +7,13 @@ export default class Discussion extends Component {
   constructor(props) {
       super(props);
       this.renderDisc = this.renderDisc.bind(this);
-      this.onChangeReply = this.onChangeReply.bind(this);
+      // this.onChangeReply = this.onChangeReply.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
       // this.renderReplies = this.renderReplies(this);
 
       this.state = {
         discussions: [],
-        reply: ''
+        replies: []
       }
   }
 
@@ -32,16 +32,16 @@ export default class Discussion extends Component {
 
   }
 
-  onChangeReply(e) {
+  onChangeReply(i, e) {
     this.setState( {
-      reply: e.target.value
+      replies: { ...this.state.replies, [i]: e.target.value}
     })
   }
 
-  onSubmit(e) {
+  onSubmit(i, e) {
     e.preventDefault();
     const reply = {
-      body: this.state.reply
+      body: this.state.replies[i]
     }
     axios.post("http://localhost:5000/discussion/addReply", reply, { withCredentials: true })
     .then(window.location.reload());
@@ -49,46 +49,46 @@ export default class Discussion extends Component {
 
   renderDisc() {
       // {{#each discussion}}
-      var items = []
-      this.state.discussions.forEach(element => {
+      var items = [];
+      var element = this.state.discussions;
+      for (var i = 0; i < element.length; i++) {
         items.push(
-      <div>
-      <div class="discussion_box">
-        <div class="d_profile_pic">
-          <a href="/profile/{{this.USER_ID}}">
-            <img class="post-img" src={element.image} />
-          </a>
-        </div>
-        <div class="details">
-          <div class="title_topic">
-            <strong class="title">{element.title}</strong>
-        <strong class="topic">{element.topic.topic}</strong>
-            <br></br>
-          </div>
-          <div class="body_date">
-            <span class="body">{element.body}</span>
-            <span class="date">{element.createdAt}</span>
-          </div>
-        </div>
-      </div>
-      <div class="reply">
-        <button class="reply-btn btn-primary" onclick="toggle()">Replies</button>
-        <div class="form-popup hide" id="myForm">
-          {renderReplies(element)}
-          <form onSubmit= {this.onSubmit}> 
-            <div class="comment_box">
-                <input id="description" class="comment_field" type="text" name="reply" placeholder="  add your reply ..." name="description" minlength="1"
-                  maxlength="2000" value={this.state.reply} onChange= {this.onChangeReply}></input><br></br>
-                <button class="btn btn-primary comment_btn" type="submit">Comment</button>
-                <input value={element._id} hidden="true"></input>
+          <div>
+          <div class="discussion_box">
+            <div class="d_profile_pic">
+              <a href="/profile/{{this.USER_ID}}">
+                <img class="post-img" src={element[i].image} />
+              </a>
             </div>
-          </form>
-        </div>
-      </div>
-      </div>
-        )
-      
-      })
+            <div class="details">
+              <div class="title_topic">
+                <strong class="title">{element[i].title}</strong>
+            <strong class="topic">{element[i].topic.topic}</strong>
+                <br></br>
+              </div>
+              <div class="body_date">
+                <span class="body">{element[i].body}</span>
+                <span class="date">{element[i].createdAt}</span>
+              </div>
+            </div>
+          </div>
+          <div class="reply">
+            <button class="reply-btn btn-primary" onclick="toggle()">Replies</button>
+            <div class="form-popup hide" id="myForm">
+              {renderReplies(element)}
+              <form onSubmit= {this.onSubmit.bind(this, i)}> 
+                <div class="comment_box">
+                    <input id="description" class="comment_field" type="text" name="reply" placeholder="  add your reply ..." name="description" minlength="1"
+                      maxlength="2000" value={this.state.replies[i]} onChange= {this.onChangeReply.bind(this, i)}></input><br></br>
+                    <button class="btn btn-primary comment_btn" type="submit">Comment</button>
+                    <input value={element[i]._id} hidden="true"></input>
+                </div>
+              </form>
+            </div>
+          </div>
+          </div>
+            )
+      }
       return items;
       {/* {{/each}} */}
   }

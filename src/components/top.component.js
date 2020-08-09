@@ -68,7 +68,6 @@ export default class Top extends Component {
 
   render() {
     var log;
-    console.log(this.props.loggedIn);
     if (this.props.loggedIn) {
       log = <Logout/>
     } else {

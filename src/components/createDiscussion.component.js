@@ -30,7 +30,6 @@ export default class createDiscussion extends Component {
     }
 
     onChangeTopic(e) {
-        console.log(e.target.value);
         this.setState({
             topic_id: e.target.value
         });
@@ -38,7 +37,6 @@ export default class createDiscussion extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.state.topic_id);
         const discussion = {
             title: this.state.title,
             body:this.state.body,

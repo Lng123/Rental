@@ -62,7 +62,6 @@ export default class signUp extends Component {
       password: this.state.password,
     };
 
-    console.log(signUp);
     axios
       .post("http://localhost:5000/signup", signUp, { withCredentials: true })
       .then((response) => {

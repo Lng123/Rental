@@ -5,7 +5,6 @@ let User = require('../models/user.model')
 
 router.route('/').get(async (req, res) => {
   // req.session.userId ="test";
-  console.log(req.session);
     if (!req.session.loggedIn) {
         res.send();
         return;
@@ -26,12 +25,9 @@ router.route('/signup').post( async (req, res) => {
       const user =  req.body
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(user.password, salt);
-      console.log(salt);
-      console.log(hashedPassword);
+
       user.password = hashedPassword;
-      console.log(user);
       const newUser = new User.User(user);
-      console.log(newUser)
       newUser.save()
           .then(() => res.json("registered"))
           .catch(err => res.status(400).json(err));
@@ -68,7 +64,6 @@ router.route('/login').post(async (req, res) => {
     // console.log("session" + req.session);
   } else {
     res.send("invalid")
-    console.log("doesnt");
   }
 })
 
