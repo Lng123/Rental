@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 let Discuss = require('../models/discussion.model')
+let User = require('../models/user.model')
 
 router.route("/create").post(async (req, res) => {
     // var userId = req.session.userId;
@@ -33,12 +34,42 @@ router.route("/addTopic").post(async (req, res) => {
 })
 
 router.route("/getDisc").get(async (req, res) => {
-    var disc = await Discuss.Discussion.find().sort({"createdAt": -1})
-    .then(disc => {
-        console.log(disc);
+    var disc = await Discuss.Discussion.find().populate("topic").populate("replies").sort({"createdAt": -1}).lean()
+    .then(async disc => {
+        for (var i= 0; i < disc.length; i++) {
+            userImage = await User.User.find({email: disc[i].user});
+            disc[i].image = userImage[0].image;
+        }
         res.json(disc);
     }).catch(err => res.status(400).json('Error: ' + err));
 
 }) 
+
+router.route('/addReply').post(async (req,res) => {
+    await User.User.find({email :req.session.userId})
+    .then((users) =>{
+        const Reply = Discuss.Reply({
+            // user = req.session.userId,
+            // body = req.body.body
+            user: users._id,
+            body: req.body.body,
+            image:users.image,
+    
+        })
+    
+        Reply.save();
+        Discuss.Discussion.update({_id: req.body.disc},{$push: {replies: Reply}},
+        function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+                res.send();
+            }
+        })
+    })
+
+    
+})
 
 module.exports = router;

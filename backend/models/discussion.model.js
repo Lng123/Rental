@@ -8,7 +8,7 @@ const discussionSchema = new Schema(
     user: { type: String },
     title: { type: String },
     body: { type: String },
-    replies: {type: Schema.Types.ObjectId, ref: 'Reply'},
+    replies: [{type: Schema.Types.ObjectId, ref: 'Reply'}],
   },
   { timestamps: true }
 );

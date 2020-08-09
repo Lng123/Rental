@@ -9,7 +9,7 @@ const userSchema = new Schema({
     password:{type: String, required: true},
     rating: [{type: Schema.Types.ObjectId, ref: 'Rating'}],
     about: {type: String},
-    picture: {type: String}
+    image: {type: String}
 });
 
 const ratingSchema = new Schema({

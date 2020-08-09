@@ -10,7 +10,7 @@ export default class ProfileCard extends Component {
             return(
                 <div class="card align-items-center col-md-2">
                 <a href="">
-                   <img class="card-img-top rounded-circle" src=""></img>
+                   <img class="card-img-top rounded-circle" src={this.props.user.image}></img>
                 </a>
                 <div class="card-body">
             <h3 class="card-title text-center"> {this.props.user.firstName} {this.props.user.lastName}</h3>
