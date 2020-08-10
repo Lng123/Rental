@@ -9,7 +9,6 @@ router.route("/create").post(async (req, res) => {
     // var title = req.body.title;
     // var body = req.body.body;
     var dTopic = await Discuss.Topic.find({topic_id :req.body.topic_id});
-    console.log(dTopic);
     const Disc = Discuss.Discussion({
         topic: dTopic[0]._id,
         user: req.session.userId,
@@ -46,18 +45,24 @@ router.route("/getDisc").get(async (req, res) => {
 }) 
 
 router.route('/addReply').post(async (req,res) => {
+    console.log(req.session.userId);
+    if (req.session.userId == null) {
+        res.send(200, true);
+        return;
+    }
     await User.User.find({email :req.session.userId})
     .then((users) =>{
+        console.log(users);
         const Reply = Discuss.Reply({
             // user = req.session.userId,
             // body = req.body.body
-            user: users._id,
+            user: users[0]._id,
             body: req.body.body,
-            image:users.image,
+            image:users[0].image,
     
         })
-    
         Reply.save();
+        console.log(req.body.disc)
         Discuss.Discussion.update({_id: req.body.disc},{$push: {replies: Reply}},
         function (error, success) {
             if (error) {

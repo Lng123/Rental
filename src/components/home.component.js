@@ -19,8 +19,6 @@ export default class Home extends Component {
         axios
         .get("http://localhost:5000", { withCredentials: true })
         .then((response) => {
-          console.log("TEST " + JSON.stringify(response));
-          console.log((response.data).length);
           if ((response.data).length > 0) {
             this.setState({
                 loggedIn: true,

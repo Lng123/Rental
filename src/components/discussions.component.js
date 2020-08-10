@@ -13,7 +13,8 @@ export default class Discussion extends Component {
 
       this.state = {
         discussions: [],
-        replies: []
+        replies: [],
+        discId: []
       }
   }
 
@@ -38,13 +39,23 @@ export default class Discussion extends Component {
     })
   }
 
+
   onSubmit(i, e) {
     e.preventDefault();
+
     const reply = {
-      body: this.state.replies[i]
+      body: this.state.replies[i],
+      disc: this.state.discId[i]
     }
-    axios.post("http://localhost:5000/discussion/addReply", reply, { withCredentials: true })
-    .then(window.location.reload());
+    console.log(reply);
+    // axios.post("http://localhost:5000/discussion/addReply", reply,  { withCredentials: true })
+    // .then((res) => {
+    //   console.log(res.data);
+    //   if (res.data == true) {
+    //     alert("You need to be logged in");
+    //   } 
+    //   window.location.reload();
+    // });
   }
 
   renderDisc() {
@@ -73,7 +84,7 @@ export default class Discussion extends Component {
             </div>
           </div>
           <div class="reply">
-            <button class="reply-btn btn-primary" onclick="toggle()">Replies</button>
+            <button class="reply-btn btn-primary" onClick="toggle()">Replies</button>
             <div class="form-popup hide" id="myForm">
               {renderReplies(element)}
               <form onSubmit= {this.onSubmit.bind(this, i)}> 
@@ -81,7 +92,7 @@ export default class Discussion extends Component {
                     <input id="description" class="comment_field" type="text" name="reply" placeholder="  add your reply ..." name="description" minlength="1"
                       maxlength="2000" value={this.state.replies[i]} onChange= {this.onChangeReply.bind(this, i)}></input><br></br>
                     <button class="btn btn-primary comment_btn" type="submit">Comment</button>
-                    <input value={element[i]._id} hidden="true"></input>
+                    <input value={element[i]._id} hidden={true} ref = {(input) => {this.state.discId[i] = input}}></input>
                 </div>
               </form>
             </div>
