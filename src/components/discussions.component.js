@@ -42,20 +42,21 @@ export default class Discussion extends Component {
 
   onSubmit(i, e) {
     e.preventDefault();
-
     const reply = {
       body: this.state.replies[i],
-      disc: this.state.discId[i]
+      discId: this.refs[i].value
     }
     console.log(reply);
-    // axios.post("http://localhost:5000/discussion/addReply", reply,  { withCredentials: true })
-    // .then((res) => {
-    //   console.log(res.data);
-    //   if (res.data == true) {
-    //     alert("You need to be logged in");
-    //   } 
-    //   window.location.reload();
-    // });
+    console.log(i);
+    console.log(this.refs[i].value);
+    axios.post("http://localhost:5000/discussion/addReply", reply,  { withCredentials: true })
+    .then((res) => {
+      console.log(res.data);
+      if (res.data == true) {
+        alert("You need to be logged in");
+      } 
+      window.location.reload();
+    });
   }
 
   renderDisc() {
@@ -92,7 +93,10 @@ export default class Discussion extends Component {
                     <input id="description" class="comment_field" type="text" name="reply" placeholder="  add your reply ..." name="description" minlength="1"
                       maxlength="2000" value={this.state.replies[i]} onChange= {this.onChangeReply.bind(this, i)}></input><br></br>
                     <button class="btn btn-primary comment_btn" type="submit">Comment</button>
-                    <input value={element[i]._id} hidden={true} ref = {(input) => {this.state.discId[i] = input}}></input>
+                    <input value={element[i]._id} hidden={true} ref = {i}
+                    // {(input) => {this.state.discId[i] = input;
+                    // console.log(input)}}
+                    ></input>
                 </div>
               </form>
             </div>
@@ -120,6 +124,7 @@ export default class Discussion extends Component {
 
 function renderReplies(disc) {
 
+  console.log(disc)
           // {{#each this.replies}}
           // {{>reply reply=this}}
           // {{/each}}
