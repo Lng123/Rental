@@ -87,7 +87,7 @@ export default class Discussion extends Component {
           <div class="reply">
             <button class="reply-btn btn-primary" onClick="toggle()">Replies</button>
             <div class="form-popup hide" id="myForm">
-              {renderReplies(element)}
+              {renderReplies(element[i])}
               <form onSubmit= {this.onSubmit.bind(this, i)}> 
                 <div class="comment_box">
                     <input id="description" class="comment_field" type="text" name="reply" placeholder="  add your reply ..." name="description" minlength="1"
@@ -131,14 +131,15 @@ function renderReplies(disc) {
   if (!disc.replies) {
     return;
   }
-  console.log(disc.replies);
+  // console.log(disc.replies);
   var items = [];
-  disc.replies.forEach(element => {
+  disc.replies.forEach(element => { 
+    console.log(element);
     items.push(
       <div class="reply_box">
       <div class="post_profile_pic">
           <a href="/profile/{{reply.USER_ID}}">
-              <img class="post-img" src='{{reply.PROFILE_PICTURE}}' />
+              <img class="post-img" src={element.image} />
           </a>
       </div>
       <div class="post_body">

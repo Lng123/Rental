@@ -62,8 +62,8 @@ router.route('/addReply').post(async (req,res) => {
     
         })
         Reply.save();
-        console.log(req.body.disc)
-        Discuss.Discussion.update({_id: req.body.disc},{$push: {replies: Reply}},
+        console.log(req.body.discId);
+        Discuss.Discussion.update({_id: req.body.discId},{$push: {replies: Reply}},
         function (error, success) {
             if (error) {
                 console.log(error);

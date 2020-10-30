@@ -20,7 +20,8 @@ const topicSchema = new Schema({
 
 const repliesSchema = new Schema ({
   user: { type: String },
-  body: { type: String }
+  body: { type: String },
+  image: {type: String}
 })
 
 const Discussion = mongoose.model('Discussion', discussionSchema);
