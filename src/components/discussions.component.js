@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import '../css/discussions.css';
 
 
 export default class Discussion extends Component {
@@ -59,8 +60,16 @@ export default class Discussion extends Component {
     });
   }
 
+  replyToggle(i){
+    var replies = document.getElementsByClassName("form-popup")[i];
+    
+    if(replies.classList.contains("hide")){
+        replies.classList.remove("hide");
+    } else replies.classList.add("hide");
+  }
+
+
   renderDisc() {
-      // {{#each discussion}}
       var items = [];
       var element = this.state.discussions;
       for (var i = 0; i < element.length; i++) {
@@ -85,7 +94,7 @@ export default class Discussion extends Component {
             </div>
           </div>
           <div class="reply">
-            <button class="reply-btn btn-primary" onClick="toggle()">Replies</button>
+            <button class="reply-btn btn-primary" onClick={this.replyToggle.bind(this, i)}>Replies</button>
             <div class="form-popup hide" id="myForm">
               {renderReplies(element[i])}
               <form onSubmit= {this.onSubmit.bind(this, i)}> 
@@ -94,8 +103,6 @@ export default class Discussion extends Component {
                       maxlength="2000" value={this.state.replies[i]} onChange= {this.onChangeReply.bind(this, i)}></input><br></br>
                     <button class="btn btn-primary comment_btn" type="submit">Comment</button>
                     <input value={element[i]._id} hidden={true} ref = {i}
-                    // {(input) => {this.state.discId[i] = input;
-                    // console.log(input)}}
                     ></input>
                 </div>
               </form>
@@ -105,7 +112,6 @@ export default class Discussion extends Component {
             )
       }
       return items;
-      {/* {{/each}} */}
   }
   
   
@@ -125,9 +131,6 @@ export default class Discussion extends Component {
 function renderReplies(disc) {
 
   console.log(disc)
-          // {{#each this.replies}}
-          // {{>reply reply=this}}
-          // {{/each}}
   if (!disc.replies) {
     return;
   }

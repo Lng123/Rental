@@ -1,0 +1,177 @@
+#discussion_container{
+    border: solid lightgray;
+    border-width: .5px;
+}
+
+.reply_box {
+    border: solid lightgray;
+    border-width: .5px;
+    float: right;
+    width: 80%;
+}
+
+.discussion_box{
+    word-wrap: normal;
+    display: flex;
+    flex-direction: row;
+}
+
+div.reply{
+    border-bottom: solid lightgrey;
+    border-width: .5px;
+    margin-right: 0px;
+}
+
+.title_topic{
+    overflow: hidden;
+    width: 100%;
+}
+
+.title{
+    overflow: hidden;
+}
+
+.topic{
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    color: turquoise;
+    border: turquoise solid;
+    border-width: 0.5px;
+    padding: 3px;
+}
+
+.comment_box {
+    float: right;
+    display: flex;
+}
+
+.title, .topic {
+    font-size: 1.5em;
+}
+
+.body_date{
+    float: left;
+    
+}
+
+.post-flex-container, .inner-flex {
+    display: flex;
+    border-width: .5px;
+    word-wrap: break-word;
+    /* border: solid lightgray; */
+}
+
+.post-flex-container {
+    flex-direction: column;
+    width: 40rem;
+}
+
+.post-flex-table {
+    margin: auto;
+}
+
+.post-row {
+    /* border-top: 1px; */
+    justify-content: left;
+}
+
+.details {
+    float: right;
+    font-family: 'Varela Round', sans-serif;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.subject {
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+.description {
+    font-size: 15px;
+}
+
+.reply {
+    flex-direction: row;
+    margin-right: 10px;
+}
+
+.reply-btn {
+    border: none;
+    height: 25px;
+    border-radius: 5px;
+    width: 75px;
+    align-self: flex-end;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.post-img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    align-self: flex-start;
+    margin: 10px;
+}
+
+/* .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+.form-container {
+    max-width: 450px;
+    padding: 10px;
+    background-color: white;
+} */
+
+.form-container input[type=text] {
+    width: 90.632%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+.reply{
+    display: flex;
+    flex-direction: column;
+}
+
+.hide{
+    display: none;
+}
+
+.comment_box {
+    margin-right: 10px;
+    display: flex;
+}
+
+.comment_field {
+    width: 425px;
+    height: 50px;
+    float: left;
+}
+
+.comment_btn {
+    float: right;
+    margin-top: 0px 10px;
+    padding: 6px 6px;
+}
+
+.reply_box {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.post_profile_pic {
+    float: left;
+}
+
+.post_body {
+    margin-top: 10px;
+    float: right;
+    overflow: hidden;
+    
+}
