@@ -74,14 +74,14 @@ export default class Top extends Component {
       log = <Login/>
     }
     return (
-      <div class="container">
-        <div class="row mt-5">
+      <nav class="navbar sticky-top">
+        <div class="row top-container">
           <div class="col-md-4">
             <h1>Rental Forum</h1>
           </div>
           {log}
         </div>
-      </div>
+      </nav>
     );
   }
 }

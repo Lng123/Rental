@@ -8,6 +8,9 @@ router.route("/create").post(async (req, res) => {
     // var topicId = req.body.id;
     // var title = req.body.title;
     // var body = req.body.body;
+    if (req.session.userId == null) {
+        throw new Error("Not logged in");
+    }
     var dTopic = await Discuss.Topic.find({topic_id :req.body.topic_id});
     const Disc = Discuss.Discussion({
         topic: dTopic[0]._id,

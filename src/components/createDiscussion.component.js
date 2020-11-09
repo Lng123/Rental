@@ -37,6 +37,9 @@ export default class createDiscussion extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        if (this.state.user == null) {
+            alert("Not Logged In");
+        }
         const discussion = {
             title: this.state.title,
             body:this.state.body,
@@ -58,10 +61,10 @@ export default class createDiscussion extends Component {
                 <h4 class ="text-secondary">What is your question today</h4>
                 <form onSubmit={this.onSubmit}>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Subject" name='title' onChange={this.onChangeTitle} value={this.state.title}></input>
+                        <input type="text" class="form-control" placeholder="Subject" name='title' onChange={this.onChangeTitle} value={this.state.title} required></input>
                     </div>
                     <div class="form-group">
-                        <textarea id="explain" rows="3" class="form-control" placeholder="Body" name='body' onChange={this.onChangeBody} value={this.state.body}></textarea>
+                        <textarea id="explain" rows="3" class="form-control" placeholder="Body" name='body' onChange={this.onChangeBody} value={this.state.body} required></textarea>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
@@ -71,7 +74,7 @@ export default class createDiscussion extends Component {
                                 <option value="3">LandLord Question</option>
                             </select>
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Create Post</button>
+                                <button class="btn btn-create" type="submit">Create Post</button>
                             </div>
                         </div>
                     </div>
